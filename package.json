@@ -1,0 +1,21 @@
+{
+  "name": "rest-api-express-mysql-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "axios": "^0.24.0",
+    "jest": "^27.3.1"
+  }
+}
