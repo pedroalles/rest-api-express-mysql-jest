@@ -1,4 +1,9 @@
+const crypto = require('crypto');
 const axios = require('axios');
+
+const generate = () => {
+    return crypto.randomBytes(20).toString('hex');
+};
 
 test('should get posts', async () => {
     const response = await axios({
