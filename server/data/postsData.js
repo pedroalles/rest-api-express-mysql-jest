@@ -7,6 +7,13 @@ const getPosts = async () => {
     return posts;
 };
 
+const savePost = async (post) => {
+    Post.init(connection);
+    const new_post = await Post.create({ title: post.title, content: post.content });
+    return new_post;
+};
+
 module.exports = {
     getPosts,
+    savePost
 };
