@@ -13,7 +13,17 @@ const savePost = async (post) => {
     return new_post;
 };
 
+const deletePost = async (id) => {
+    Post.init(connection);
+    await Post.destroy({
+        where: {
+            id: id
+        }
+    });
+};
+
 module.exports = {
     getPosts,
-    savePost
+    savePost,
+    deletePost
 };
