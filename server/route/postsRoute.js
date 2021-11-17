@@ -7,4 +7,10 @@ router.get('/posts', async (req, res) => {
     res.json(posts);
 });
 
+router.post('/posts', async (req, res) => {
+    const post = req.body;
+    const new_post = await postsService.savePost(post);
+    res.json(new_post);
+});
+
 module.exports = router;
