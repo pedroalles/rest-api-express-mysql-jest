@@ -1,10 +1,14 @@
-const mysql = require('mysql2');
+const Sequelize = require('sequelize');
+const dbConfig = require('../../config/database');
 
-const db = mysql.createConnection({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASS,
-    database: process.env.MYSQL_DATABASE,
-});
 
-module.exports = { db };
+const connection = new Sequelize(dbConfig);
+
+try {
+    connection.authenticate();
+    console.log('Connection has been established successfully.');
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+
+module.exports = connection;
