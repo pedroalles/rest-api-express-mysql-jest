@@ -1,13 +1,10 @@
-const { db } = require('../infra/database');
+const connection = require('../infra/database');
+const Post = require('../../database/models/Post');
 
-const getPosts = () => {
-    return new Promise((resolve, reject) => {
-        const query_ = 'select * from blog.post';
-        db.query(query_, (err, result, fields) => {
-            if (err) reject(err);
-            if (result) resolve(result);
-        });
-    });
+const getPosts = async () => {
+    Post.init(connection);
+    const posts = await Post.findAll();
+    return posts;
 };
 
 module.exports = {
