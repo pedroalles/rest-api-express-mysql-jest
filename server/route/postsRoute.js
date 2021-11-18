@@ -9,7 +9,7 @@ router.get('/posts', async (req, res) => {
 
 router.post('/posts', async ({ body }, res) => {
     const post = await postsService.savePost(body);
-    res.json(post);
+    res.status(201).json(post);
 });
 
 router.put('/posts/:id', async ({ body, params }, res) => {
