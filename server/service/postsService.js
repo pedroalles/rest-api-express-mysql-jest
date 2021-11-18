@@ -1,21 +1,21 @@
 const postsData = require('../data/postsData');
 
-exports.getPosts = async () => {
+exports.getPosts = () => {
     return postsData.getPosts();
 };
 
-exports.getPost = async (id) => {
+exports.getPost = (id) => {
     return postsData.getPost(id);
 };
 
-exports.savePost = async (post) => {
+exports.savePost = (post) => {
     return postsData.savePost(post);
 };
 
-exports.deletePost = async (id) => {
+exports.deletePost = (id) => {
     return postsData.deletePost(id);
 };
 
-exports.updatePost = async (id, post) => {
+exports.updatePost = (id, post) => {
     return postsData.updatePost(id, post);
 };
