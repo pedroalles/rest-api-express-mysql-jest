@@ -8,8 +8,12 @@ router.get('/posts', async (req, res) => {
 });
 
 router.post('/posts', async ({ body }, res) => {
-    const post = await postsService.savePost(body);
-    res.status(201).json(post);
+    try {
+        const post = await postsService.savePost(body);
+        res.status(201).json(post);
+    } catch (e) {
+        res.status(409).send(e.message);
+    }
 });
 
 router.put('/posts/:id', async ({ body, params }, res) => {
