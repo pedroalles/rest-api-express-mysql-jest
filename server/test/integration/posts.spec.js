@@ -53,3 +53,13 @@ test('should update a post', async () => {
 
     await postsService.deletePost(post.id);
 });
+
+test('should delete a post', async () => {
+
+    const post = await postsService.savePost({ title: generate(), content: generate() });
+
+    await request(`http://localhost:3000/posts/${post.id}`, 'delete');
+
+    const posts = await postsService.getPosts();
+    expect(posts).toHaveLength(0);
+});
