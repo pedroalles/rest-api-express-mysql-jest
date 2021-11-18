@@ -54,7 +54,7 @@ test('should update a post', async () => {
     await postsService.deletePost(post.id);
 });
 
-test.only('should not update a post', async () => {
+test('should not update a post', async () => {
     const post = { id: 1 };
 
     const response = await request(`http://localhost:3000/posts/${post.id}`, 'put', post);
