@@ -13,6 +13,12 @@ exports.getPost = async (id) => {
     });
 };
 
+exports.getPostByTitle = async (title) => {
+    return Post.findOne({
+        where: { title: title }
+    });
+};
+
 exports.savePost = async ({ title, content }) => {
     return Post.create({
         title,
