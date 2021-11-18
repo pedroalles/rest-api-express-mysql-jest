@@ -49,8 +49,9 @@ test('should update a post', async () => {
     post.title = generate();
     post.content = generate();
 
-    await request(`http://localhost:3000/posts/${post.id}`, 'put', post);
-
+    const response = await request(`http://localhost:3000/posts/${post.id}`, 'put', post);
+    const status = response.status;
+    expect(status).toBe(204);
     const updatedPost = await postsService.getPost(post.id);
 
     expect(updatedPost.title).toBe(post.title);
