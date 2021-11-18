@@ -25,7 +25,7 @@ test('should get posts', async () => {
     await postsService.deletePost(post3.id);
 });
 
-test('should save post', async () => {
+test('should save a post', async () => {
 
     const data = { title: generate(), content: generate() };
 
@@ -33,6 +33,23 @@ test('should save post', async () => {
     const post = response.data;
     expect(post.title).toBe(data.title);
     expect(post.content).toBe(data.content);
+
+    await postsService.deletePost(post.id);
+});
+
+test('should update a post', async () => {
+
+    const post = await postsService.savePost({ title: generate(), content: generate() });
+
+    post.title = generate();
+    post.content = generate();
+
+    await request(`http://localhost:3000/posts/${post.id}`, 'put', post);
+
+    const updatedPost = await postsService.getPost(post.id);
+
+    expect(updatedPost.title).toBe(post.title);
+    expect(updatedPost.content).toBe(post.content);
 
     await postsService.deletePost(post.id);
 });
