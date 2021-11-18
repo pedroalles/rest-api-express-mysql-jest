@@ -14,7 +14,7 @@ router.post('/posts', async ({ body }, res) => {
 
 router.put('/posts/:id', async ({ body, params }, res) => {
     await postsService.updatePost(params.id, body);
-    res.end();
+    res.status(204).end();
 });
 
 router.delete('/posts/:id', async ({ params }, res) => {
