@@ -18,6 +18,8 @@ test('should get posts', async () => {
 
     const response = await request('http://localhost:3000/posts', 'get');
     const posts = response.data;
+    const status = response.status;
+    expect(status).toBe(200);
     expect(posts).toHaveLength(3);
 
     await postsService.deletePost(post1.id);
