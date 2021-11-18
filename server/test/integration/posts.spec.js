@@ -32,7 +32,6 @@ test('should save a post', async () => {
     const data = { title: generate(), content: generate() };
 
     const response = await request('http://localhost:3000/posts', 'post', data);
-
     const post = response.data;
     const status = response.status;
     expect(status).toBe(201);
@@ -53,7 +52,6 @@ test('should update a post', async () => {
     const status = response.status;
     expect(status).toBe(204);
     const updatedPost = await postsService.getPost(post.id);
-
     expect(updatedPost.title).toBe(post.title);
     expect(updatedPost.content).toBe(post.content);
 
@@ -64,8 +62,9 @@ test('should delete a post', async () => {
 
     const post = await postsService.savePost({ title: generate(), content: generate() });
 
-    await request(`http://localhost:3000/posts/${post.id}`, 'delete');
-
+    const response = await request(`http://localhost:3000/posts/${post.id}`, 'delete');
+    const status = response.status;
+    expect(status).toBe(204);
     const posts = await postsService.getPosts();
     expect(posts).toHaveLength(0);
 });
