@@ -1,44 +1,36 @@
 const connection = require('../infra/database');
 const Post = require('../../database/models/Post');
 
+Post.init(connection);
+
 exports.getPosts = async () => {
-    Post.init(connection);
-    const posts = await Post.findAll();
-    return posts;
+    return Post.findAll();
 };
 
 exports.getPost = async (id) => {
-    Post.init(connection);
-    const post = await Post.findOne({
-        where: {
-            id: id
-        }
+    return Post.findOne({
+        where: { id: id }
     });
-    return post;
 };
 
-exports.savePost = async (post) => {
-    Post.init(connection);
-    const new_post = await Post.create({ title: post.title, content: post.content });
-    return new_post;
+exports.savePost = async ({ title, content }) => {
+    return Post.create({
+        title,
+        content,
+    });
 };
 
 exports.deletePost = async (id) => {
-    Post.init(connection);
     await Post.destroy({
-        where: {
-            id: id
-        }
+        where: { id: id }
     });
 };
 
 exports.updatePost = async (id, { title, content }) => {
-    Post.init(connection);
     await Post.update({
-        title, content
+        title,
+        content
     }, {
-        where: {
-            id: id
-        }
+        where: { id: id }
     });
 };
