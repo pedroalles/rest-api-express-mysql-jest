@@ -7,20 +7,18 @@ router.get('/posts', async (req, res) => {
     res.json(posts);
 });
 
-router.post('/posts', async (req, res) => {
-    const post = req.body;
-    const new_post = await postsService.savePost(post);
-    res.json(new_post);
+router.post('/posts', async ({ body }, res) => {
+    const post = await postsService.savePost(body);
+    res.json(post);
 });
 
-router.put('/posts/:id', async (req, res) => {
-    const post = req.body;
-    await postsService.updatePost(req.params.id, post);
+router.put('/posts/:id', async ({ body, params }, res) => {
+    await postsService.updatePost(params.id, body);
     res.end();
 });
 
-router.delete('/posts/:id', async (req, res) => {
-    await postsService.deletePost(req.params.id);
+router.delete('/posts/:id', async ({ params }, res) => {
+    await postsService.deletePost(params.id);
     res.end();
 });
 
