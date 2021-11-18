@@ -13,8 +13,12 @@ router.post('/posts', async ({ body }, res) => {
 });
 
 router.put('/posts/:id', async ({ body, params }, res) => {
-    await postsService.updatePost(params.id, body);
-    res.status(204).end();
+    try {
+        await postsService.updatePost(params.id, body);
+        res.status(204).end();
+    } catch (e) {
+        res.status(404).send(e.message);
+    }
 });
 
 router.delete('/posts/:id', async ({ params }, res) => {
