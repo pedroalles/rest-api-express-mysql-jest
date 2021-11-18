@@ -12,7 +12,11 @@ router.post('/posts', async ({ body }, res) => {
         const post = await postsService.savePost(body);
         res.status(201).json(post);
     } catch (e) {
-        res.status(409).send(e.message);
+        if (e.message === 'Post already exists') {
+            res.status(409).send(e.message);
+        } else {
+            res.status(500).send(e.message);
+        }
     }
 });
 
@@ -21,7 +25,11 @@ router.put('/posts/:id', async ({ body, params }, res) => {
         await postsService.updatePost(params.id, body);
         res.status(204).end();
     } catch (e) {
-        res.status(404).send(e.message);
+        if (e.message === 'Post not found') {
+            res.status(404).send(e.message);
+        } else {
+            res.status(500).send(e.message);
+        }
     }
 });
 
