@@ -32,7 +32,10 @@ test('should save a post', async () => {
     const data = { title: generate(), content: generate() };
 
     const response = await request('http://localhost:3000/posts', 'post', data);
+
     const post = response.data;
+    const status = response.status;
+    expect(status).toBe(201);
     expect(post.title).toBe(data.title);
     expect(post.content).toBe(data.content);
 
